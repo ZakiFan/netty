@@ -45,6 +45,7 @@ import io.netty.util.NetUtil;
 import io.netty.util.ReferenceCountUtil;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.FutureListener;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -64,8 +65,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class Http2MultiplexTransportTest {
     private static final ChannelHandler DISCARD_HANDLER = new ChannelHandlerAdapter() {
@@ -111,13 +112,13 @@ public class Http2MultiplexTransportTest {
     }
 
     @Test
-    @Timeout(value = 10000L, unit = MILLISECONDS)
+    @Timeout(value = 10000, unit = MILLISECONDS)
     public void asyncSettingsAckWithMultiplexCodec() throws InterruptedException {
         asyncSettingsAck0(new Http2MultiplexCodecBuilder(true, DISCARD_HANDLER).build(), null);
     }
 
     @Test
-    @Timeout(value = 10000L, unit = MILLISECONDS)
+    @Timeout(value = 10000, unit = MILLISECONDS)
     public void asyncSettingsAckWithMultiplexHandler() throws InterruptedException {
         asyncSettingsAck0(new Http2FrameCodecBuilder(true).build(),
                 new Http2MultiplexHandler(DISCARD_HANDLER));
